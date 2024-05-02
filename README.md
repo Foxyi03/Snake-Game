@@ -6,6 +6,9 @@ This game is an adaptation to the classic snake game.
 It will include enemies that search for food too, if the snake touches an enemy it's body will shrink instead of a game over.
 The game only ends when the snake shrinks until only it's head is visible or when it hits itself or a obstacle.
 
+//current status
+
+The files are just the layout on how I want it to look like. Nothing is set in place and stuff will be added or removed. 
 
 //info-dump
 
