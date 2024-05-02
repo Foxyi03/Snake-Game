@@ -9,7 +9,7 @@ The game only ends when the snake shrinks until only it's head is visible or whe
 //current status
 
 The files are just the layout on how I want it to look like. Nothing is set in place and stuff will be added or removed. 
-Right now only some comments are inside as I do not know where to start yet due to having too many Ideas at once.
+Right now only some comments are inside. Everything is commented with what I would like it to contain.
 
 //info-dump
 
