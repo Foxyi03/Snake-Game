@@ -4,29 +4,17 @@
  */
 package snake.body;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+
+
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Foxyi03
  */
 public class Head { 
-    private int x = 300;
-    private int y = 300;
-    private Point point;
-    private int width ;
-    private int height;
-
-    public Head(Point sPoint) {
-        this.point = sPoint;
-    }
-    
-    //main Head
-    private void draw(Graphics g){
-       //TODO
-    }
+    ImageIcon iih = new ImageIcon("snake.lib/snakeHead.png");
+    //head = iih.getImage();
 }
 
 //the head will be drawn here

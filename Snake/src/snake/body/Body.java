@@ -4,18 +4,15 @@
  */
 package snake.body;
 
-import java.awt.Point;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Foxyi03
  */
 public class Body {
-    private int x;
-    private int y;
-    private Point point;
-    private int width;
-    private int height;
+    ImageIcon iib = new ImageIcon("snake.lib/snakeBody.png");
+    //body = iib.getImage();
     
 }
 //body will be here
