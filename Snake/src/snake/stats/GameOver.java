@@ -4,11 +4,20 @@
  */
 package snake.stats;
 
+import java.awt.Color;
+
+import java.awt.Graphics;
+
+import snake.main.Snake;
+
 /**
  *
  * @author Foxyi03
  */
-public class GameOver {
+public class GameOver extends Snake{
+    private int Width;
+    private int Height;
+
     
 }
 //ending Screen

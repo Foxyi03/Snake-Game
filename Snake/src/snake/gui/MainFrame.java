@@ -6,22 +6,26 @@ package snake.gui;
 
 import java.awt.*;
 
+import javax.swing.Timer;
+
 /**
  *
  * @author Foxyi03
  */
 public class MainFrame extends javax.swing.JFrame {
     
+    private int gameSpeed;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
-        loadImages();
-
-
         initComponents();
+
+        Timer timer = new Timer(gameSpeed, this);
+        timer.start();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -4,11 +4,13 @@
  */
 package snake.main;
 
-import java.awt.Point;
+import java.awt.image.ImageObserver;
+
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -33,6 +35,7 @@ public class Snake {
 
     private Image body;
     private Image head;
+    private Image apple;
     private Timer timer;
 
     private int parts;
@@ -46,6 +49,8 @@ public class Snake {
         
         ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
             head = iih.getImage();
+        ImageIcon iia = new ImageIcon("src/lib/apple.png");
+            apple = iia.getImage();
     }
     private void initField(){
         parts = 3;
@@ -66,9 +71,98 @@ public class Snake {
     }
     
     private void draw(Graphics g){
-        if
+        if(inField){
+            g.drawImage(apple, appleX, appleY, this);
+
+            for(int i = 0; i < parts; i++){
+                if(i ==0){
+                    g.drawImage(head, x[i], y[i], this);
+                } else {
+                    g.drawImage(body, x[i], y[i], this);
+                }
+            }
+             Toolkit.getDefaultToolkit().sync();
+
+        } else {
+
+            gameOver(g);
+        }       
+
     }
 
+    private void gameOver(Graphics g){
+        String msg = "Game Over";
+        g.setColor(Color.white);
+        g.drawString(msg, Width / 2, Height / 2);
+    }
+    private void checkApple(){
+        if((x[0]== appleX) && (y[0]== appleY)){
+            parts ++;
+            appleLoc();
+        }
+    }
+    private void actionPerformed(ActionEvent e){
+        if(inField){
+            checkApple();
+            checkCollision();
+            move();
+        }
+        repaint();
+    }
+    
+    private void move() {
+
+        for (int z = parts; z > 0; z--) {
+            x[z] = x[(z - 1)];
+            y[z] = y[(z - 1)];
+        }
+
+        if (goLeft) {
+            x[0] -= Size;
+        }
+
+        if (goRight) {
+            x[0] += Size;
+        }
+
+        if (goUp) {
+            y[0] -= Size;
+        }
+
+        if (goDown) {
+            y[0] += Size;
+        }
+    }
+
+    private void checkCollision() {
+
+        for (int z = parts; z > 0; z--) {
+
+            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
+                inField = false;
+            }
+        }
+
+        if (y[0] >= Height) {
+            inField = false;
+        }
+
+        if (y[0] < 0) {
+            inField = false;
+        }
+
+        if (x[0] >= Width) {
+            inField = false;
+        }
+
+        if (x[0] < 0) {
+            inField = false;
+        }
+        
+        if (!inField) {
+            timer.stop();
+        }
+    }
 
 
 
