@@ -6,6 +6,8 @@ package snake.main;
 
 import java.awt.Point;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
+
 import java.awt.*;
 
 /**
@@ -19,6 +21,7 @@ public class Snake {
     private final int maxSize = 900; //max numbers of things on the DrawPanel
     private final int randomPosition = 30; //calculation of the position of an apple
     
+    
     private final int x[] = new int[maxSize]; //learned this from the internet, stores the x coordinates of all the bodyparts of the snake
     private final int y[] = new int[maxSize];//stores the y coordinates of all the bodyparts of the snake
 
@@ -30,6 +33,12 @@ public class Snake {
 
     private Image body;
     private Image head;
+    private Timer timer;
+
+    private int parts;
+    private int appleX;
+    private int appleY;
+
 
     private void loadImages(){
         ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
@@ -38,8 +47,23 @@ public class Snake {
         ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
             head = iih.getImage();
     }
-    
+    private void initField(){
+        parts = 3;
 
+        for(int i = 0; i < parts; i++){
+            x[i] = 50 - i * 10;
+            y[i] = 50;
+        }
+        appleLoc();
+
+        
+    }
+    private void appleLoc(){
+        int r = (int) (Math.random() * randomPosition);
+        appleX = (r * Size);
+        appleY = (r * Size);
+
+    }
     
     private void draw(Graphics g){
         if
