@@ -4,13 +4,22 @@
  */
 package snake.main;
 
-
+import java.awt.Point;
 
 /**
  *
  * @author Foxyi03
  */
 public class Snake { 
+    private int x;
+    private int y;
+    private Point point;
+
+    public Snake(int pX, int pY) {
+        this.x = pX;
+        this.y = pY;
+        
+    }
     
     
 }
