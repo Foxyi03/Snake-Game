@@ -223,4 +223,3 @@ public class Snake {
     
     
 }
-//the snake will be build here, head + body

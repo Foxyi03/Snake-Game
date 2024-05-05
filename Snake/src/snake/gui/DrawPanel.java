@@ -4,14 +4,16 @@
  */
 package snake.gui;
 
+
 import java.awt.Graphics;
+import snake.main.Snake;
 
 /**
  *
  * @author Foxyi03
  */
 public class DrawPanel extends javax.swing.JPanel {
-
+    private Snake snake;
     /**
      * Creates new form DrawPanel
      */
@@ -20,6 +22,17 @@ public class DrawPanel extends javax.swing.JPanel {
         
 
     }
+    public void setSnake(Snake snake){
+        this.snake = snake;
+        repaint();
+    }
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        
+        draw(g);
+    }
+   
     
     /**
      * This method is called from within the constructor to initialize the form.
