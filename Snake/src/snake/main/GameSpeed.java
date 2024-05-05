@@ -9,6 +9,7 @@ package snake.main;
  * @author Foxyi03
  */
 public class GameSpeed {
+    private int gameSpeed = 0;
     
 }
 //the game speed will be set here

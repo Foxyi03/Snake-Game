@@ -4,16 +4,22 @@
  */
 package snake.gui;
 
+import java.awt.*;
+
 /**
  *
  * @author Foxyi03
  */
 public class MainFrame extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+        loadImages();
+
+
         initComponents();
     }
 

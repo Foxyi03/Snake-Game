@@ -4,6 +4,8 @@
  */
 package snake.gui;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author Foxyi03
@@ -15,8 +17,10 @@ public class DrawPanel extends javax.swing.JPanel {
      */
     public DrawPanel() {
         initComponents();
-    }
+        
 
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
