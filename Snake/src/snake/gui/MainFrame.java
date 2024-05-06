@@ -19,14 +19,14 @@ public class MainFrame extends javax.swing.JFrame {
     private Snake snake = null;
     private boolean inField = false;
     
-    private int gameSpeed;
+    private int gameSpeed = 100;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        
+        //common things to add to the frame
         setResizable(false);
         pack();
         
@@ -38,11 +38,25 @@ public class MainFrame extends javax.swing.JFrame {
         
         snake = new Snake();
         drawPanel.setSnake(snake);
+        
+        
+        
+    }
+    //creates the snake, randomly places an apple, starts the timer
+    public void initField(){
+        snake.parts = 3;
+
+        for(int i = 0; i < snake.parts; i++){
+            snake.x[i] = 50 - i * 10;
+            snake.y[i] = 50;
+        }
+        snake.appleLoc();
+        
         Timer timer = new Timer(gameSpeed, (ActionListener) this);
         timer.start();
         
     }
-    
+    //checks if everything is in the field, if not then the drawPanel needs to repaint
     public void actionPerformed(ActionEvent e){
         if(inField){
             snake.checkApple();
