@@ -30,7 +30,7 @@ public class DrawPanel extends javax.swing.JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         
-        draw(g);
+        snake.draw(g);
     }
    
     

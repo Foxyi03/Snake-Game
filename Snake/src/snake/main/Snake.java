@@ -4,6 +4,7 @@
  */
 package snake.main;
 
+import com.sun.java.accessibility.util.AWTEventMonitor;
 import java.awt.image.ImageObserver;
 
 import javax.swing.ImageIcon;
@@ -27,10 +28,10 @@ public class Snake {
     private final int x[] = new int[maxSize]; //learned this from the internet, stores the x coordinates of all the bodyparts of the snake
     private final int y[] = new int[maxSize];//stores the y coordinates of all the bodyparts of the snake
 
-    private boolean goLeft = false;
-    private boolean goRight = false;
-    private boolean goUp = false;
-    private boolean goDown = false;
+    public boolean goLeft = false;
+    public boolean goRight = false;
+    public boolean goUp = false;
+    public boolean goDown = false;
     private boolean inField = false;
 
     private Image body;
@@ -41,18 +42,21 @@ public class Snake {
     private int parts;
     private int appleX;
     private int appleY;
+    
+    
+    
 
-
-    private void loadImages(){
+    public void loadImages(){
         ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
             body = iib.getImage();
         
         ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
             head = iih.getImage();
+        
         ImageIcon iia = new ImageIcon("src/lib/apple.png");
             apple = iia.getImage();
     }
-    private void initField(){
+    public void initField(){
         parts = 3;
 
         for(int i = 0; i < parts; i++){
@@ -63,22 +67,22 @@ public class Snake {
 
         
     }
-    private void appleLoc(){
+    public void appleLoc(){
         int r = (int) (Math.random() * randomPosition);
         appleX = (r * Size);
         appleY = (r * Size);
 
     }
     
-    private void draw(Graphics g){
+    public void draw(Graphics g){
         if(inField){
-            g.drawImage(apple, appleX, appleY, this);
+            g.drawImage(apple, appleX, appleY, (ImageObserver) this);
 
             for(int i = 0; i < parts; i++){
                 if(i ==0){
-                    g.drawImage(head, x[i], y[i], this);
+                    g.drawImage(head, x[i], y[i], (ImageObserver) this);
                 } else {
-                    g.drawImage(body, x[i], y[i], this);
+                    g.drawImage(body, x[i], y[i], (ImageObserver) this);
                 }
             }
              Toolkit.getDefaultToolkit().sync();
@@ -90,27 +94,27 @@ public class Snake {
 
     }
 
-    private void gameOver(Graphics g){
+    public void gameOver(Graphics g){
         String msg = "Game Over";
         g.setColor(Color.white);
         g.drawString(msg, Width / 2, Height / 2);
     }
-    private void checkApple(){
+    public void checkApple(){
         if((x[0]== appleX) && (y[0]== appleY)){
             parts ++;
             appleLoc();
         }
     }
-    private void actionPerformed(ActionEvent e){
+    /*public void actionPerformed(ActionEvent e){
         if(inField){
             checkApple();
             checkCollision();
             move();
         }
         repaint();
-    }
+    }*/
     
-    private void move() {
+    public void move() {
 
         for (int z = parts; z > 0; z--) {
             x[z] = x[(z - 1)];
@@ -134,7 +138,7 @@ public class Snake {
         }
     }
 
-    private void checkCollision() {
+    public void checkCollision() {
 
         for (int z = parts; z > 0; z--) {
 

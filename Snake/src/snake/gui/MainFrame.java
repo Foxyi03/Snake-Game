@@ -6,6 +6,8 @@ package snake.gui;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import snake.main.Snake;
 import javax.swing.Timer;
 
@@ -24,19 +26,30 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        
+        setResizable(false);
+        pack();
+        
+        setTitle("Snake_Game");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        
+        
         snake = new Snake();
         drawPanel.setSnake(snake);
-        Timer timer = new Timer(gameSpeed, this);
+        Timer timer = new Timer(gameSpeed, (ActionListener) this);
         timer.start();
+        
     }
     
-    private void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){
         if(inField){
-            checkApple();
-            checkCollision();
-            move();
+            snake.checkApple();
+            snake.checkCollision();
+            snake.move();
         }
-        repaint();
+        drawPanel.repaint();
     }
 
     /**
@@ -51,6 +64,12 @@ public class MainFrame extends javax.swing.JFrame {
         drawPanel = new snake.gui.DrawPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        drawPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                drawPanelKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
         drawPanel.setLayout(drawPanelLayout);
@@ -78,6 +97,31 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void drawPanelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drawPanelKeyPressed
+        int key = evt.getKeyCode();
+        
+        if((key == KeyEvent.VK_LEFT) && (!snake.goRight)){
+            snake.goLeft = true;
+            snake.goUp = false;
+            snake.goDown = false;
+        }
+        if((key == KeyEvent.VK_RIGHT)&&(!snake.goLeft)){
+            snake.goRight = true;
+            snake.goUp = false;
+            snake.goDown = false;
+        }
+        if((key == KeyEvent.VK_UP)&&(!snake.goDown)){
+            snake.goLeft = false;
+            snake.goUp = true;
+            snake.goRight = false;
+        }
+        if((key == KeyEvent.VK_DOWN)&&(!snake.goUp)){
+            snake.goLeft = false;
+            snake.goDown = true;
+            snake.goRight = false;
+        }
+    }//GEN-LAST:event_drawPanelKeyPressed
 
     /**
      * @param args the command line arguments
