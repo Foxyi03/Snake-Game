@@ -88,10 +88,9 @@ public class Snake {
             }
              Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
 
-        } else {
-
-            gameOver(g); //it is game over once the parts are null
-        }       
+        }  else {
+            gameOver(g); //it is game over once the parts are null < something is wrong here, needs to be loocked upon
+        }      
 
     }
 
