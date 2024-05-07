@@ -36,12 +36,14 @@ public class Snake {
     private Image body;
     private Image head;
     private Image apple;
+    private Image bread;
     private Timer timer;
     //body and head and apple parts are being called up + the location of the apple 
     public int parts;
     private int appleX;
     private int appleY;
-    
+    private int breadX;
+    private int breadY;
     
     
 
@@ -54,6 +56,10 @@ public class Snake {
         
         ImageIcon iia = new ImageIcon("src/lib/apple.png");
             apple = iia.getImage();
+        
+        ImageIcon iibread = new ImageIcon("src/lib/bread.png");
+            bread = iibread.getImage();
+         
     }
     /*public void initField(){
         parts = 3;
@@ -72,11 +78,17 @@ public class Snake {
         appleY = (r * Size);
 
     }
+    public void breadLoc(){//generates a bread at a random position on the field
+        int b = (int)(Math.random()* randomPosition);
+        breadX = (b * Size);
+        breadY = (b * Size);
+    }
     
     public void draw(Graphics g){ //draws the apple and the snake
         if(inField){
             g.drawImage(apple, appleX, appleY, (ImageObserver) this);
-
+            g.drawImage(bread,breadX, breadY,(ImageObserver)this);
+            
             for(int i = 0; i < parts; i++){
                 if(i ==0){
                     g.drawImage(head, x[i], y[i], (ImageObserver) this);
@@ -101,6 +113,13 @@ public class Snake {
         if((x[0]== appleX) && (y[0]== appleY)){
             parts ++;
             appleLoc();
+        }
+    }
+    
+    public void checkBread(){//checks for bread
+        if((x[0]==breadX) && (y[0]==breadY)){
+            parts ++;
+            breadLoc();
         }
     }
     /*public void actionPerformed(ActionEvent e){

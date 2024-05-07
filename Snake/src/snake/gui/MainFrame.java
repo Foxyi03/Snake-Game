@@ -16,7 +16,7 @@ import javax.swing.Timer;
  * @author Foxyi03
  */
 public class MainFrame extends javax.swing.JFrame {
-    private Snake snake = null;
+    private Snake snake;
     private boolean inField = false;
     
     private int gameSpeed = 100;
@@ -52,7 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
             snake.y[i] = 50;
         }
         snake.appleLoc();
-        
+        snake.breadLoc();
         Timer timer = new Timer(gameSpeed, (ActionListener) this);
         timer.start();
         
@@ -61,6 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void actionPerformed(ActionEvent e){
         if(inField){
             snake.checkApple();
+            snake.checkBread();
             snake.checkCollision();
             snake.move();
         }
