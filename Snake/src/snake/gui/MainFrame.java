@@ -36,6 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         
         
+        
         snake = new Snake();
         drawPanel.setSnake(snake);
         
