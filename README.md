@@ -8,8 +8,7 @@ The game only ends when the snake shrinks until only it's head is visible or whe
 
 //current status
 
-The files are just the layout on how I want it to look like. Nothing is set in place and stuff will be added or removed. 
-Right now only some comments are inside. Everything is commented with what I would like it to contain.
+Currently containing the first idea of the game. I can see a picture but it defaults so the game over screen. Needs debugging. Found the spot that needs fixing. After fixing the gameover screen, mainframe and drawPanel needs to be checked of any bugs. shortened the initial layout do to it being too overwhelming and starting small. Will add more classes if finished with a baseline.
 
 //info-dump
 
