@@ -100,6 +100,7 @@ public class Snake {
 
         }  else {
             gameOver(g); //it is game over once the parts are null < something is wrong here, needs to be looked upon
+            score(g);//gives the current score
         }      
 
     }
@@ -116,11 +117,19 @@ public class Snake {
         }
     }
     
-    public void checkBread(){//checks for bread
+    public void checkBread(){//checks for bread, i think it adds 2 parts
         if((x[0]==breadX) && (y[0]==breadY)){
+            parts ++;
             parts ++;
             breadLoc();
         }
+    }
+    
+    public void score(Graphics g){//returns the score
+        String scoremsg = "Score:";
+        int scoreAmount = parts;
+        g.setColor(Color.BLACK);
+        g.drawString(scoremsg + " " + scoreAmount, Width , Height);
     }
     /*public void actionPerformed(ActionEvent e){
         if(inField){
