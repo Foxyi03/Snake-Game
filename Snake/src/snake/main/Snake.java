@@ -23,7 +23,7 @@ public class Snake {
     private final int randomPosition = 30; //calculation of the position of an apple
     
     
-    public final int x[] = new int[maxSize]; //learned this from the internet, stores the x coordinates of all the bodyparts of the snake
+    public final int x[] = new int[maxSize]; //stores the x coordinates of all the bodyparts of the snake
     public final int y[] = new int[maxSize];//stores the y coordinates of all the bodyparts of the snake
 
     //directions are set to false by default
@@ -32,13 +32,13 @@ public class Snake {
     public boolean goUp = false;
     public boolean goDown = false;
     private boolean inField = false;
-    //Images are being called to be implemented
+    //Images are being called to be implemented, the images are in snake.lib
     private Image body;
     private Image head;
     private Image apple;
     private Image bread;
     private Timer timer;
-    //body and head and apple parts are being called up + the location of the apple 
+    //body and head and apple parts are being called up + the location of the food
     public int parts;
     private int appleX;
     private int appleY;
@@ -47,20 +47,7 @@ public class Snake {
     
     
 
-    public void loadImages(){ //Images are loaded up
-        ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
-            body = iib.getImage();
-        
-        ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
-            head = iih.getImage();
-        
-        ImageIcon iia = new ImageIcon("src/lib/apple.png");
-            apple = iia.getImage();
-        
-        ImageIcon iibread = new ImageIcon("src/lib/bread.png");
-            bread = iibread.getImage();
-         
-    }
+    
     /*public void initField(){
         parts = 3;
 
@@ -86,8 +73,8 @@ public class Snake {
     
     public void draw(Graphics g){ //draws the apple and the snake
         if(!inField){
-            g.drawImage(apple, appleX, appleY, this); //snake cannot be converted to ImageObserver
-            g.drawImage(bread,breadX, breadY,this);
+            g.drawImage(apple, appleX, appleY, (ImageObserver) this); //snake cannot be converted to ImageObserver
+            g.drawImage(bread,breadX, breadY, (ImageObserver) this);
             
             for(int i = 0; i < parts; i++){
                 if(i ==0){
@@ -104,7 +91,20 @@ public class Snake {
         }      
 
     }
-
+    public void loadImages(){ //Images are loaded up / Change of plans, draw the head and body parts with draw
+        ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
+            body = iib.getImage();
+        
+        ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
+            head = iih.getImage();
+        
+        ImageIcon iia = new ImageIcon("src/lib/apple.png");
+            apple = iia.getImage();
+        
+        ImageIcon iibread = new ImageIcon("src/lib/bread.png");
+            bread = iibread.getImage();
+         
+    }
     public void gameOver(Graphics g){ //game over screen
         String msg = "Game Over";
         g.setColor(Color.black);
@@ -119,8 +119,7 @@ public class Snake {
     
     public void checkBread(){//checks for bread, i think it adds 2 parts
         if((x[0]==breadX) && (y[0]==breadY)){
-            parts ++;
-            parts ++;
+            parts +=2; //adds 2 bread
             breadLoc();
         }
     }
@@ -189,7 +188,7 @@ public class Snake {
             inField = false;
         }
         
-        if (!inField) {
+        if (inField) {
             timer.stop();
         }
     }
