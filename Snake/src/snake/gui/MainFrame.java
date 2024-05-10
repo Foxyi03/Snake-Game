@@ -113,7 +113,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void drawPanelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drawPanelKeyPressed
         int key = evt.getKeyCode();
-        
+        //reads the key presses and sets them to the right direction
         if((key == KeyEvent.VK_LEFT) && (!snake.goRight)){
             snake.goLeft = true;
             snake.goUp = false;
