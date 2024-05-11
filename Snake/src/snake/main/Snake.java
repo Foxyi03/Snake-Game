@@ -91,6 +91,11 @@ public class Snake {
         }      
 
     }
+    public void appledraw(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillOval(appleX, appleY, Size, Size);
+        
+    }
     public void loadImages(){ //Images are loaded up / Change of plans, draw the head and body parts with draw
         ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
             body = iib.getImage();
