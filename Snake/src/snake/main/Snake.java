@@ -46,6 +46,13 @@ public class Snake {
     private int breadY;
     
     
+    
+    
+    
+
+
+
+    
 
     
     /*public void initField(){
@@ -221,6 +228,9 @@ public class Snake {
     }
     public int[] getY() {
         return y;
+    }
+    public int[] getX(){
+        return x;
     }
     public boolean isGoLeft() {
         return goLeft;
