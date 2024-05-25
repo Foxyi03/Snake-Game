@@ -79,7 +79,7 @@ public class Snake {
     }
     
     public void draw(Graphics g){ //draws the apple and the snake
-        if(!inField){
+        if(!inField){ //need to change the code to draw the images -> look into the solutions for the latest progr chapter
             g.drawImage(apple, appleX, appleY, (ImageObserver) this); //snake cannot be converted to ImageObserver
             g.drawImage(bread,breadX, breadY, (ImageObserver) this); 
             
