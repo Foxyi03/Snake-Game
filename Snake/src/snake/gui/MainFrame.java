@@ -15,7 +15,7 @@ import javax.swing.Timer;
  *
  * @author Foxyi03
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame implements ActionListener{
     private Snake snake;
     private boolean inField = false;
     
@@ -50,11 +50,12 @@ public class MainFrame extends javax.swing.JFrame {
         }
         snake.appleLoc();
         snake.breadLoc();
-        Timer timer = new Timer(gameSpeed, (ActionListener) this);
+        Timer timer = new Timer(gameSpeed, this);
         timer.start();
         
     }
     //checks if everything is in the field, if not then the drawPanel needs to repaint
+    @Override
     public void actionPerformed(ActionEvent e){
         if(inField){
             snake.checkApple();
@@ -78,21 +79,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        drawPanel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                drawPanelKeyPressed(evt);
-            }
-        });
-
         javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
         drawPanel.setLayout(drawPanelLayout);
         drawPanelLayout.setHorizontalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 678, Short.MAX_VALUE)
         );
         drawPanelLayout.setVerticalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 458, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -100,41 +95,20 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 100, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void drawPanelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drawPanelKeyPressed
-        int key = evt.getKeyCode();
-        //reads the key presses and sets them to the right direction
-        if((key == KeyEvent.VK_LEFT) && (!snake.goRight)){
-            snake.goLeft = true;
-            snake.goUp = false;
-            snake.goDown = false;
-        }
-        if((key == KeyEvent.VK_RIGHT)&&(!snake.goLeft)){
-            snake.goRight = true;
-            snake.goUp = false;
-            snake.goDown = false;
-        }
-        if((key == KeyEvent.VK_UP)&&(!snake.goDown)){
-            snake.goLeft = false;
-            snake.goUp = true;
-            snake.goRight = false;
-        }
-        if((key == KeyEvent.VK_DOWN)&&(!snake.goUp)){
-            snake.goLeft = false;
-            snake.goDown = true;
-            snake.goRight = false;
-        }
-    }//GEN-LAST:event_drawPanelKeyPressed
 
     /**
      * @param args the command line arguments

@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
  *
  * @author Foxyi03
  */
-public class Snake { 
+public class Snake implements ImageObserver{ 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
     private final int Size = 10; //sizes of the body and foods
@@ -80,14 +80,14 @@ public class Snake {
     
     public void draw(Graphics g){ //draws the apple and the snake
         if(!inField){ //need to change the code to draw the images -> look into the solutions for the latest progr chapter
-            g.drawImage(apple, appleX, appleY, (ImageObserver) this); //snake cannot be converted to ImageObserver
-            g.drawImage(bread,breadX, breadY, (ImageObserver) this); 
+            g.drawImage(apple, appleX, appleY,  this); //snake cannot be converted to ImageObserver
+            g.drawImage(bread,breadX, breadY,  this); 
             
             for(int i = 0; i < parts; i++){
                 if(i ==0){
-                    g.drawImage(head, x[i], y[i], (ImageObserver) this);
+                    g.drawImage(head, x[i], y[i],  this);
                 } else {
-                    g.drawImage(body, x[i], y[i], (ImageObserver) this);
+                    g.drawImage(body, x[i], y[i], this);
                 }
             }
              Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
@@ -206,8 +206,10 @@ public class Snake {
     }
 
 
+/*------------------------------------------------------------------------------------------------------------------------*/
 
-
+    //draw body and head
+    
 
 
 //getter and setters
@@ -261,6 +263,11 @@ public class Snake {
     }
     public void setInField(boolean inField) {
         this.inField = inField;
+    }
+
+    @Override
+    public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
