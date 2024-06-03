@@ -4,16 +4,18 @@
  */
 
 
+import com.sun.java.accessibility.util.AWTEventMonitor;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  *
  * @author Foxyi03
  */
-public abstract class Snake implements ImageObserver{ 
+public class Snake { 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
     private final int Size = 10; //sizes of the body and foods
@@ -31,10 +33,7 @@ public abstract class Snake implements ImageObserver{
     public boolean goDown = false;
     private boolean inField = false;
     //Images are being called to be implemented, the images are in snake.lib
-    private Image body;
-    private Image head;
-    private Image apple;
-    private Image bread;
+    
     private Timer timer;
     //body and head and apple parts are being called up + the location of the food
     public int parts;
@@ -78,14 +77,14 @@ public abstract class Snake implements ImageObserver{
     
     public void draw(Graphics g){ //draws the apple and the snake
         if(!inField){ //need to change the code to draw the images -> look into the solutions for the latest progr chapter
-            g.drawImage(apple, appleX, appleY,  this); //snake cannot be converted to ImageObserver
-            g.drawImage(bread,breadX, breadY,  this); 
+            //g.drawImage(apple, appleX, appleY,  this); //snake cannot be converted to ImageObserver
+            //g.drawImage(bread,breadX, breadY,  this); 
             
             for(int i = 0; i < parts; i++){
                 if(i ==0){
-                    g.drawImage(head, x[i], y[i],  this);
+                    //g.drawImage(head, x[i], y[i],  this);
                 } else {
-                    g.drawImage(body, x[i], y[i], this);
+                    //g.drawImage(body, x[i], y[i], this);
                 }
             }
              Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
@@ -101,20 +100,7 @@ public abstract class Snake implements ImageObserver{
         g.fillOval(appleX, appleY, Size, Size);
         
     }
-    public void loadImages(){ //Images are loaded up / Change of plans, draw the head and body parts with draw
-        ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
-            body = iib.getImage();
-        
-        ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
-            head = iih.getImage();
-        
-        ImageIcon iia = new ImageIcon("src/lib/apple.png");
-            apple = iia.getImage();
-        
-        ImageIcon iibread = new ImageIcon("src/lib/bread.png");
-            bread = iibread.getImage();
-         
-    }
+    
     public void gameOver(Graphics g){ //game over screen
         String msg = "Game Over";
         g.setColor(Color.black);
@@ -207,7 +193,13 @@ public abstract class Snake implements ImageObserver{
 /*------------------------------------------------------------------------------------------------------------------------*/
 
     //draw body and head
-    
+    private void body(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillOval(x[0], y[0], Size, Size);
+    }
+    //private void head
+    //private void apple
+    //private void bread
 
 
 //getter and setters
@@ -263,8 +255,8 @@ public abstract class Snake implements ImageObserver{
         this.inField = inField;
     }
 
-   
-   
+    
+    
     
     
 }
