@@ -12,9 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.Timer;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  *
@@ -23,7 +21,8 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class MainFrame extends javax.swing.JFrame implements ActionListener{
     private Snake snake;
     private boolean inField = false;
-    
+    private final int Width = 300; //width of the drawPanel
+    private final int Height = 300; //height of the drawPanel
     private int gameSpeed = 100;
 
     /**
@@ -34,20 +33,20 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         //common things to add to the frame
         setResizable(false);
         pack();
-        
+        setPreferredSize(new Dimension(Width,Height));
         setTitle("Snake_Game");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         snake = new Snake();
-        
+        add(new Snake());
         drawPanel.setSnake(snake);
         
         
         
     }
     //creates the snake, randomly places an apple, starts the timer
-    public void initField(){
+    public void initGame(){
         snake.parts = 3;
 
         for(int i = 0; i < snake.parts; i++){

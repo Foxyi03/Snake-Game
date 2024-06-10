@@ -4,8 +4,7 @@
  */
 
 
-import java.awt.image.ImageObserver;
-import javax.swing.ImageIcon;
+
 import javax.swing.Timer;
 import java.awt.*;
 
@@ -30,11 +29,6 @@ public class Snake{
     public boolean goUp = false;
     public boolean goDown = false;
     private boolean inField = false;
-    //Images are being called to be implemented, the images are in snake.lib
-    private Image body;
-    private Image head;
-    private Image apple;
-    private Image bread;
     private Timer timer;
     //body and head and apple parts are being called up + the location of the food
     public int parts;
@@ -44,6 +38,29 @@ public class Snake{
     private int breadY;
 
 /*------------------------------------------------------------------------------------------------------------------------*/
+    public void draw(Graphics g){ //draws the game
+        if(!inField){ 
+            //draws head and body of the snake as well as the game start screen
+            bodydraw(g);
+            headdraw(g);
+        
+            for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
+                if(i == 0){
+                    headdraw(g);
+                } else {
+                    bodydraw(g);
+                }
+            }
+            Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
+
+            }  else {
+            gameOver(g); //it is game over once the parts are null 
+            score(g);//gives the current score
+        }      
+
+    }    
+
+
     public void appleLoc(){  //generates an apple at a random position on the field
         int r = (int) (Math.random() * randomPosition);
         appleX = (r * Size);
@@ -56,27 +73,7 @@ public class Snake{
         breadY = (b * Size);
     }
     
-    public void draw(Graphics g){ //draws the game
-        if(!inField){ 
-            //draws head and body of the snake as well as the game start screen
-            bodydraw(g);
-            headdraw(g);
-            
-            for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
-                if(i == 0){
-                    headdraw(g);
-                } else {
-                    bodydraw(g);
-                }
-            }
-            Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
-
-        }  else {
-            gameOver(g); //it is game over once the parts are null 
-            score(g);//gives the current score
-        }      
-
-    }
+    
     public void appledraw(Graphics g){
         g.setColor(Color.GREEN);
         g.fillOval(appleX, appleY, Size, Size);
@@ -181,21 +178,7 @@ public class Snake{
         g.setColor(Color.BLUE);
         g.fillOval(x[0], y[0], Size, Size);
     }
-/*------------------------------------------------------------------------------------------------------------------------*/
-    public void loadImages(){ //Images are loaded up / Change of plans, draw the head and body parts with draw
-        ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
-            body = iib.getImage();
-        
-        ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
-            head = iih.getImage();
-        
-        ImageIcon iia = new ImageIcon("src/lib/apple.png");
-            apple = iia.getImage();
-        
-        ImageIcon iibread = new ImageIcon("src/lib/bread.png");
-            bread = iibread.getImage();
-         
-    }
+
 /*------------------------------------------------------------------------------------------------------------------------*/
     
     /*public void actionPerformed(ActionEvent e){

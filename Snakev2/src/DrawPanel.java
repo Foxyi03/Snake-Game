@@ -27,7 +27,7 @@ public class DrawPanel extends javax.swing.JPanel {
     }
     public void setSnake(Snake snake){
         this.snake = snake;
-        repaint();
+        
     }
     @Override
     public void paintComponent(Graphics g){
