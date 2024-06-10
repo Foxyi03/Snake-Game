@@ -4,18 +4,16 @@
  */
 
 
-import com.sun.java.accessibility.util.AWTEventMonitor;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 /**
  *
  * @author Foxyi03
  */
-public class Snake { 
+public class Snake{ 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
     private final int Size = 10; //sizes of the body and foods
@@ -33,7 +31,10 @@ public class Snake {
     public boolean goDown = false;
     private boolean inField = false;
     //Images are being called to be implemented, the images are in snake.lib
-    
+    private Image body;
+    private Image head;
+    private Image apple;
+    private Image bread;
     private Timer timer;
     //body and head and apple parts are being called up + the location of the food
     public int parts;
@@ -41,28 +42,8 @@ public class Snake {
     private int appleY;
     private int breadX;
     private int breadY;
-    
-    
-    
-    
-    
 
-
-
-    
-
-    
-    /*public void initField(){
-        parts = 3;
-
-        for(int i = 0; i < parts; i++){
-            x[i] = 50 - i * 10;
-            y[i] = 50;
-        }
-        appleLoc();
-
-        
-    }*/
+/*------------------------------------------------------------------------------------------------------------------------*/
     public void appleLoc(){  //generates an apple at a random position on the field
         int r = (int) (Math.random() * randomPosition);
         appleX = (r * Size);
@@ -75,19 +56,20 @@ public class Snake {
         breadY = (b * Size);
     }
     
-    public void draw(Graphics g){ //draws the apple and the snake
-        if(!inField){ //need to change the code to draw the images -> look into the solutions for the latest progr chapter
-            //g.drawImage(apple, appleX, appleY,  this); //snake cannot be converted to ImageObserver
-            //g.drawImage(bread,breadX, breadY,  this); 
+    public void draw(Graphics g){ //draws the game
+        if(!inField){ 
+            //draws head and body of the snake as well as the game start screen
+            bodydraw(g);
+            headdraw(g);
             
-            for(int i = 0; i < parts; i++){
-                if(i ==0){
-                    //g.drawImage(head, x[i], y[i],  this);
+            for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
+                if(i == 0){
+                    headdraw(g);
                 } else {
-                    //g.drawImage(body, x[i], y[i], this);
+                    bodydraw(g);
                 }
             }
-             Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
+            Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
 
         }  else {
             gameOver(g); //it is game over once the parts are null 
@@ -99,6 +81,11 @@ public class Snake {
         g.setColor(Color.GREEN);
         g.fillOval(appleX, appleY, Size, Size);
         
+    }
+    public void gameStart(Graphics g){ //game start screen, needs to be implemented
+        String msg = "Game Start";
+        g.setColor(Color.BLACK);
+        g.drawString(msg, Width/2, Height/2);
     }
     
     public void gameOver(Graphics g){ //game over screen
@@ -126,14 +113,7 @@ public class Snake {
         g.setColor(Color.BLACK);
         g.drawString(scoremsg + " " + scoreAmount, Width , Height);
     }
-    /*public void actionPerformed(ActionEvent e){
-        if(inField){
-            checkApple();
-            checkCollision();
-            move();
-        }
-        repaint();
-    }*/
+    
     
     public void move() { //movement of the snake
 
@@ -193,15 +173,52 @@ public class Snake {
 /*------------------------------------------------------------------------------------------------------------------------*/
 
     //draw body and head
-    private void body(Graphics g){
+    private void bodydraw(Graphics g){
         g.setColor(Color.GREEN);
         g.fillOval(x[0], y[0], Size, Size);
     }
-    //private void head
-    //private void apple
-    //private void bread
+    private void headdraw(Graphics g){
+        g.setColor(Color.BLUE);
+        g.fillOval(x[0], y[0], Size, Size);
+    }
+/*------------------------------------------------------------------------------------------------------------------------*/
+    public void loadImages(){ //Images are loaded up / Change of plans, draw the head and body parts with draw
+        ImageIcon iib = new ImageIcon("src/lib/snakeBody.png");
+            body = iib.getImage();
+        
+        ImageIcon iih = new ImageIcon("src/lib/snakeHead.png");
+            head = iih.getImage();
+        
+        ImageIcon iia = new ImageIcon("src/lib/apple.png");
+            apple = iia.getImage();
+        
+        ImageIcon iibread = new ImageIcon("src/lib/bread.png");
+            bread = iibread.getImage();
+         
+    }
+/*------------------------------------------------------------------------------------------------------------------------*/
+    
+    /*public void actionPerformed(ActionEvent e){
+        if(inField){
+            checkApple();
+            checkCollision();
+            move();
+        }
+        repaint();
+    }*/
+        
+    public void initField(){
+        parts = 3;
 
+        for(int i = 0; i < parts; i++){
+            x[i] = 50 - i * 10;
+            y[i] = 50;
+        }
+        appleLoc();
 
+        
+    }
+/*------------------------------------------------------------------------------------------------------------------------*/
 //getter and setters
     public int getWidth() {
         return Width;
@@ -255,8 +272,8 @@ public class Snake {
         this.inField = inField;
     }
 
-    
-    
+   
+   
     
     
 }

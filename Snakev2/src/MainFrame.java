@@ -40,6 +40,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         snake = new Snake();
+        
         drawPanel.setSnake(snake);
         
         
@@ -62,7 +63,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
     //checks if everything is in the field, if not then the drawPanel needs to repaint
     @Override
     public void actionPerformed(ActionEvent e){
-        if(inField){
+        if(!inField){
             snake.checkApple();
             snake.checkBread();
             snake.checkCollision();
@@ -84,15 +85,21 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        drawPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                drawPanelKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
         drawPanel.setLayout(drawPanelLayout);
         drawPanelLayout.setHorizontalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 320, Short.MAX_VALUE)
         );
         drawPanelLayout.setVerticalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 294, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,17 +108,40 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void drawPanelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drawPanelKeyPressed
+        int key = evt.getKeyCode(); //key is read and put into the right direction
+
+        if((key == KeyEvent.VK_LEFT) && (!snake.goRight)){
+            snake.goLeft = true;
+            snake.goUp = false;
+            snake.goDown = false;
+        }
+        if((key == KeyEvent.VK_RIGHT)&&(!snake.goLeft)){
+            snake.goRight = true;
+            snake.goUp = false;
+            snake.goDown = false;
+        }
+        if((key == KeyEvent.VK_UP)&&(!snake.goDown)){
+            snake.goLeft = false;
+            snake.goUp = true;
+            snake.goRight = false;
+        }
+        if((key == KeyEvent.VK_DOWN)&&(!snake.goUp)){
+            snake.goLeft = false;
+            snake.goDown = true;
+            snake.goRight = false;
+        }
+    }//GEN-LAST:event_drawPanelKeyPressed
 
     /**
      * @param args the command line arguments
