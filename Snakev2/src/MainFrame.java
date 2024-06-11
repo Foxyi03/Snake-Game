@@ -37,9 +37,8 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         setTitle("Snake_Game");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+        setBackground(Color.BLACK);
         snake = new Snake();
-        add(new Snake());
         drawPanel.setSnake(snake);
         
         
@@ -68,7 +67,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             snake.checkCollision();
             snake.move();
         }
-        drawPanel.repaint();
+        repaint();
     }
 
     /**
@@ -94,7 +93,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         drawPanel.setLayout(drawPanelLayout);
         drawPanelLayout.setHorizontalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGap(0, 363, Short.MAX_VALUE)
         );
         drawPanelLayout.setVerticalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,8 +105,8 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(84, 84, 84))
+                .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 271, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

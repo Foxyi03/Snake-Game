@@ -41,8 +41,8 @@ public class Snake{
     public void draw(Graphics g){ //draws the game
         if(!inField){ 
             //draws head and body of the snake as well as the game start screen
-            bodydraw(g);
-            headdraw(g);
+            appledraw(g);
+            breaddraw(g);
         
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
@@ -74,11 +74,7 @@ public class Snake{
     }
     
     
-    public void appledraw(Graphics g){
-        g.setColor(Color.GREEN);
-        g.fillOval(appleX, appleY, Size, Size);
-        
-    }
+    
     public void gameStart(Graphics g){ //game start screen, needs to be implemented
         String msg = "Game Start";
         g.setColor(Color.BLACK);
@@ -169,7 +165,7 @@ public class Snake{
 
 /*------------------------------------------------------------------------------------------------------------------------*/
 
-    //draw body and head
+    //draw section
     private void bodydraw(Graphics g){
         g.setColor(Color.GREEN);
         g.fillOval(x[0], y[0], Size, Size);
@@ -178,6 +174,17 @@ public class Snake{
         g.setColor(Color.BLUE);
         g.fillOval(x[0], y[0], Size, Size);
     }
+    public void appledraw(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillOval(appleX, appleY, Size, Size);
+        
+    }
+    public void breaddraw(Graphics g){
+        g.setColor(Color.lightGray);
+        g.fillOval(breadX, breadY, Size, Size);
+    }
+    
+    
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     
