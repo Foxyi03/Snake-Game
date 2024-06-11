@@ -40,12 +40,13 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         setBackground(Color.BLACK);
         snake = new Snake();
         drawPanel.setSnake(snake);
+        initGame();
         
         
         
     }
     //creates the snake, randomly places an apple, starts the timer
-    public void initGame(){
+    private void initGame(){
         snake.parts = 3;
 
         for(int i = 0; i < snake.parts; i++){
@@ -83,6 +84,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        drawPanel.setPreferredSize(new java.awt.Dimension(300, 300));
         drawPanel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 drawPanelKeyPressed(evt);
@@ -93,7 +95,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         drawPanel.setLayout(drawPanelLayout);
         drawPanelLayout.setHorizontalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
         drawPanelLayout.setVerticalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,9 +106,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 271, Short.MAX_VALUE))
+            .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

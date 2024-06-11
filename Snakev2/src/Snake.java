@@ -40,10 +40,10 @@ public class Snake{
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
         if(!inField){ 
-            //draws head and body of the snake as well as the game start screen
+            //draws everything needed to start the game
             appledraw(g);
             breaddraw(g);
-        
+            score(g);
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
                     headdraw(g);
@@ -103,7 +103,7 @@ public class Snake{
     public void score(Graphics g){//returns the score
         String scoremsg = "Score:";
         int scoreAmount = parts;
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.drawString(scoremsg + " " + scoreAmount, Width , Height);
     }
     
@@ -175,7 +175,7 @@ public class Snake{
         g.fillOval(x[0], y[0], Size, Size);
     }
     public void appledraw(Graphics g){
-        g.setColor(Color.GREEN);
+        g.setColor(Color.YELLOW);
         g.fillOval(appleX, appleY, Size, Size);
         
     }
@@ -187,7 +187,7 @@ public class Snake{
     
 
 /*------------------------------------------------------------------------------------------------------------------------*/
-    
+    //unneeded code, but won't get rid of it yet in case of need
     /*public void actionPerformed(ActionEvent e){
         if(inField){
             checkApple();
@@ -197,7 +197,7 @@ public class Snake{
         repaint();
     }*/
         
-    public void initField(){
+    /*public void initField(){
         parts = 3;
 
         for(int i = 0; i < parts; i++){
@@ -207,7 +207,7 @@ public class Snake{
         appleLoc();
 
         
-    }
+    }*/
 /*------------------------------------------------------------------------------------------------------------------------*/
 //getter and setters
     public int getWidth() {

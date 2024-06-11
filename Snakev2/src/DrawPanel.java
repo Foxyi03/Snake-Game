@@ -8,6 +8,7 @@
  * @author VilPa977
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 
@@ -32,6 +33,7 @@ public class DrawPanel extends javax.swing.JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        setBackground(Color.BLACK);
         snake.draw(g);
     }
 
