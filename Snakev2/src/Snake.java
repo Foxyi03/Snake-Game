@@ -31,7 +31,7 @@ public class Snake{
     private boolean inField = false;
     private Timer timer;
     //body and head and apple parts are being called up + the location of the food
-    public int parts;
+    public int parts = 3;
     private int appleX;
     private int appleY;
     private int breadX;
