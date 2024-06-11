@@ -19,11 +19,11 @@ import javax.swing.Timer;
  * @author Foxyi03
  */
 public class MainFrame extends javax.swing.JFrame implements ActionListener{
-    private Snake snake;
-    private boolean inField = false;
+    private final Snake snake;
+    private final boolean inField = false;
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
-    private int gameSpeed = 100;
+    private final int gameSpeed = 100;
 
     /**
      * Creates new form MainFrame
@@ -58,7 +58,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         timer.start();
         
     }
-    //checks if everything is in the field, if not then the drawPanel needs to repaint
+    //checks if everything is in the field, if not then it gets repainted
     @Override
     public void actionPerformed(ActionEvent e){
         if(!inField){
