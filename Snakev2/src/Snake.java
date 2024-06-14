@@ -7,6 +7,7 @@
 
 import javax.swing.Timer;
 import java.awt.*;
+import java.util.concurrent.DelayQueue;
 
 /**
  *
@@ -29,7 +30,8 @@ public class Snake{
     public boolean goUp = false;
     public boolean goDown = false;
     private boolean inField = false;
-    private Timer timer;
+    //rwo timers, first one is to play the game, second one is running until window is closed
+    private Timer gameTimer;
     //body and head and apple parts are being called up + the location of the food
     public int parts = 3;
     private int appleX;
@@ -39,7 +41,7 @@ public class Snake{
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
-        System.out.println(x[1] + " " + y[1]);
+        //System.out.println(x[1] + " " + y[1]);
         if(!inField){ 
             //draws everything needed to start the game
             appledraw(g);
@@ -54,14 +56,14 @@ public class Snake{
                     g.fillOval(x[i], y[i], Size, Size);
                 } else {
                     //body
-                    g.setColor(Color.GREEN);
+                    g.setColor(Color.CYAN);
                     g.fillOval(x[i], y[i], Size, Size);
                 }
             }
             Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
 
             }  else {
-            gameOver(g); //it is game over once the parts are null 
+            gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
         }      
 
@@ -88,10 +90,13 @@ public class Snake{
         g.drawString(msg, Width/2, Height/2);
     }
     
-    public void gameOver(Graphics g){ //game over screen
+    public void gameOver(Graphics g){ //game over screen, works
         String msg = "Game Over";
         g.setColor(Color.black);
         g.drawString(msg, Width / 2, Height / 2);
+    }
+    public String gameOver(){
+        return "Game Over";
     }
     public void checkApple(){ //checks if the head collides with the apple, when yes then the snake gets longer and the apple changes location
         if((x[0]== appleX) && (y[0]== appleY)){
@@ -111,7 +116,7 @@ public class Snake{
         String scoremsg = "Score:";
         int scoreAmount = parts;
         g.setColor(Color.WHITE);
-        g.drawString(scoremsg + " " + scoreAmount, Width , Height);
+        g.drawString(scoremsg + " " + scoreAmount, 10,10);
     }
     
     
@@ -164,9 +169,11 @@ public class Snake{
             inField = true;
         }
         
-        if (inField) {
-            timer.stop();
-        }
+        if (inField) { //if snake hits the wall then it should give a game over
+            gameOver();
+            gameTimer.stop();
+            
+        } 
     }
 
 
@@ -174,7 +181,7 @@ public class Snake{
 
     //draw section
     private void bodydraw(Graphics g){
-        g.setColor(Color.GREEN);
+        g.setColor(Color.CYAN);
         g.fillOval(x[0], y[0], Size, Size);
     }
     private void headdraw(Graphics g){
@@ -182,12 +189,12 @@ public class Snake{
         g.fillOval(x[0], y[0], Size, Size);
     }
     public void appledraw(Graphics g){
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.GREEN);
         g.fillOval(appleX, appleY, Size, Size);
         
     }
     public void breaddraw(Graphics g){
-        g.setColor(Color.lightGray);
+        g.setColor(Color.YELLOW);
         g.fillOval(breadX, breadY, Size, Size);
     }
     
