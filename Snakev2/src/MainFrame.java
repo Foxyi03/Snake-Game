@@ -24,6 +24,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
     private final int gameSpeed = 100;
+    private Timer timer;
 
     /**
      * Creates new form MainFrame
@@ -55,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         }
         snake.appleLoc();
         snake.breadLoc();
-        Timer timer = new Timer(gameSpeed, this);
+        timer = new Timer(gameSpeed, this);
         timer.start();
         
     }
@@ -67,6 +68,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             snake.checkBread();
             snake.checkCollision();
             snake.move();
+           
         }
         repaint();
     }
@@ -83,13 +85,13 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         drawPanel = new DrawPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        drawPanel.setPreferredSize(new java.awt.Dimension(300, 300));
-        drawPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+        addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                drawPanelKeyPressed(evt);
+                formKeyPressed(evt);
             }
         });
+
+        drawPanel.setPreferredSize(new java.awt.Dimension(300, 300));
 
         javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
         drawPanel.setLayout(drawPanelLayout);
@@ -116,7 +118,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void drawPanelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drawPanelKeyPressed
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         int key = evt.getKeyCode(); //key is read and put into the right direction
 
         if((key == KeyEvent.VK_LEFT) && (!snake.goRight)){
@@ -139,7 +141,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             snake.goDown = true;
             snake.goRight = false;
         }
-    }//GEN-LAST:event_drawPanelKeyPressed
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments

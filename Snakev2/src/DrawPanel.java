@@ -30,11 +30,18 @@ public class DrawPanel extends javax.swing.JPanel {
         this.snake = snake;
         
     }
+    
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         setBackground(Color.BLACK);
-        snake.draw(g);
+        if(snake != null){
+            snake.draw(g);
+            snake.score(g);
+        }
+        
+        
+        
     }
 
     /**

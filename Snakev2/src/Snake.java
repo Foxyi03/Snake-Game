@@ -39,16 +39,23 @@ public class Snake{
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
+        System.out.println(x[1] + " " + y[1]);
         if(!inField){ 
             //draws everything needed to start the game
             appledraw(g);
             breaddraw(g);
             score(g);
+            headdraw(g);
+            bodydraw(g);
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
-                    headdraw(g);
+                    //head
+                    g.setColor(Color.BLUE);
+                    g.fillOval(x[i], y[i], Size, Size);
                 } else {
-                    bodydraw(g);
+                    //body
+                    g.setColor(Color.GREEN);
+                    g.fillOval(x[i], y[i], Size, Size);
                 }
             }
             Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
@@ -109,8 +116,8 @@ public class Snake{
     
     
     public void move() { //movement of the snake
-
-        for (int z = parts; z > 0; z--) {
+            
+        for (int z = parts; z > 0; z--) { // need to check this again
             x[z] = x[(z - 1)];
             y[z] = y[(z - 1)];
         }
@@ -142,19 +149,19 @@ public class Snake{
         }
 
         if (y[0] >= Height) {
-            inField = false;
+            inField = true;
         }
 
         if (y[0] < 0) {
-            inField = false;
+            inField = true;
         }
 
         if (x[0] >= Width) {
-            inField = false;
+            inField = true;
         }
 
         if (x[0] < 0) {
-            inField = false;
+            inField = true;
         }
         
         if (inField) {
