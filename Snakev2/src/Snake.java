@@ -41,7 +41,7 @@ public class Snake{
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
-        //System.out.println(x[1] + " " + y[1]);
+        System.out.println(x[0] + " " + y[0]); //coordinates will be shown
         if(!inField){ 
             //draws everything needed to start the game
             appledraw(g);
