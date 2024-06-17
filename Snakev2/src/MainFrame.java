@@ -12,8 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import javax.swing.Timer;
 
 /**
@@ -179,6 +177,8 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
                 new MainFrame().setVisible(true);
             }
         });
+        //pop up screen with leaderboard
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
