@@ -33,6 +33,12 @@ public class StopWatch {
     }
     /*------------------------------------------------------------------------------------------------------------------------*/
    
-    
+    public double getTime(){
+        double time = (startTime);
+        return time / 1000;
+    }
+    public String timeElapsed(){
+        return ("Time: " + getTime() + " seconds.");
+    }
     
 }

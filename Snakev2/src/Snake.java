@@ -56,7 +56,7 @@ public class Snake{
             headdraw(g);
             bodydraw(g);
             stopWatch.start();
-            drawElapsedTime(g);    
+            drawTime(g);
             
             
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
@@ -191,6 +191,11 @@ public class Snake{
     public void drawElapsedTime(Graphics g){ //draws the elapsed time
         g.setColor(Color.WHITE);
         g.drawString(stopWatch. elapsedTime(), Size , Height );
+    }
+    
+    public void drawTime(Graphics g){
+        g.setColor(Color.WHITE);
+        g.drawString(stopWatch. timeElapsed(), Size , Height );
     }
     
 
