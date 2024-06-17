@@ -68,7 +68,6 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             snake.checkBread();
             snake.checkCollision();
             snake.move();
-            snake.checkCollisioninitself();
             
            
         } 

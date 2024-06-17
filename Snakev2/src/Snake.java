@@ -144,15 +144,15 @@ public class Snake{
         }
     }
 
-    public void checkCollision() { //checks if the snake hits borders
+    public void checkCollision() { 
 
-        for (int z = parts; z > 0; z--) {
+        for (int z = parts; z > 0; z--) {//checks if the snake hits itself
 
             if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
-                inField = false;
+                inField = true;
             }
         }
-
+        //checks if the snake hits borders
         if (y[0] >= Height) {
             inField = true;
         }
@@ -175,31 +175,7 @@ public class Snake{
         } */
         
     }
-    //lower code is faulty, gives ArrayIndexOutOfBoundsExaption
-    public void checkCollisioninitself(){ //checks if the snake hits itself
-        for (int z = parts; z > 0; z--) {
-
-            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
-                inField = false;
-            }
-        }
-        for(int i = parts; i > 0; i--){
-            if (y[0] == y[i]) {
-                inField = true;
-            }
-            if(x[0] == x[i]){
-                inField = true;
-            }
-        }
-             
-        
-        /*
-        if (inField) { //if snake hits the wall then it should give a game over
-            gameTimer.stop();
-            
-        } */
-        }
-       
+    
 
         
     
