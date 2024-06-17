@@ -7,16 +7,20 @@
 
 import javax.swing.Timer;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 
 /**
  *
  * @author Foxyi03
  */
+
 public class Snake{ 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
-    private final int Size = 10; //sizes of the body and foods
+    final int Size = 10; //sizes of the body and foods
     private final int maxSize = 900; //max numbers of things on the DrawPanel
     private final int randomPosition = 30; //calculation of the position of an apple
     
@@ -65,6 +69,7 @@ public class Snake{
             }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
+            
         } 
 
     }    
@@ -82,8 +87,6 @@ public class Snake{
         breadY = (b * Size);
     }
     
-    
-    
     public void gameStart(Graphics g){ //game start screen, needs to be implemented
         String msg = "Game Start";
         g.setColor(Color.BLACK);
@@ -95,9 +98,7 @@ public class Snake{
         g.setColor(Color.WHITE);
         g.drawString(msg, Width / 2, Height / 2);
     }
-    public String gameOver(){
-        return "Game Over";
-    }
+    
     public void checkApple(){ //checks if the head collides with the apple, when yes then the snake gets longer and the apple changes location
         if((x[0]== appleX) && (y[0]== appleY)){
             parts ++;
@@ -122,7 +123,7 @@ public class Snake{
     
     public void move() { //movement of the snake
             
-        for (int z = parts; z > 0; z--) { // need to check this again
+        for (int z = parts; z > 0; z--) { 
             x[z] = x[(z - 1)];
             y[z] = y[(z - 1)];
         }
@@ -184,6 +185,7 @@ public class Snake{
 /*------------------------------------------------------------------------------------------------------------------------*/
 
     //draw section
+    
     private void bodydraw(Graphics g){
         g.setColor(Color.CYAN);
         g.fillOval(x[0], y[0], Size, Size);
