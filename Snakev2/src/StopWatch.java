@@ -1,5 +1,4 @@
 
-import java.awt.Graphics;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,17 +21,18 @@ public class StopWatch {
         startTime = System.currentTimeMillis();
     }
     public void stop(){
-        stopTime = System.currentTimeMillis();
-        System.out.println("StopWatch: " + getElapsedTimeSecs() + " second.");
+        stopTime = (System.currentTimeMillis() - startTime) / 1000;
+        //System.out.println("StopWatch: " + getElapsedTimeSecs() + " second.");
     }
     public double getElapsedTimeSecs(){
-        double elapsed = ((double)(stopTime - startTime)) / 1000;
-        return elapsed;
+        double elapsed = (stopTime - startTime);
+        return elapsed / 1000.0;
     }
     public String elapsedTime(){
         return ("Time: " + getElapsedTimeSecs() + " seconds.");
     }
-    
+    /*------------------------------------------------------------------------------------------------------------------------*/
+   
     
     
 }

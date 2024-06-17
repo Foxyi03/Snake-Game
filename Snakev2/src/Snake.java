@@ -55,9 +55,9 @@ public class Snake{
             score(g);
             headdraw(g);
             bodydraw(g);
-            if(stopWatch == null){
-                stopWatch.start();
-            }
+            stopWatch.start();
+            drawElapsedTime(g);    
+            
             
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
@@ -75,12 +75,11 @@ public class Snake{
             }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
-            if(stopWatch == null){
-                stopWatch.stop();
-            }
+            stopWatch.stop();
             drawElapsedTime(g);
-        } 
-
+            
+        }
+        
     }    
 
 
@@ -161,11 +160,11 @@ public class Snake{
         if (x[0] < 0) {
             inField = true;
         }
-        /*
+        
         if (inField) { //if snake hits the wall then it should give a game over
-            gameTimer.stop();
-            
-        } */
+            //gameTimer.stop();
+            stopWatch.stop();
+        }
         
     }
 /*------------------------------------------------------------------------------------------------------------------------*/
@@ -191,7 +190,7 @@ public class Snake{
     
     public void drawElapsedTime(Graphics g){ //draws the elapsed time
         g.setColor(Color.WHITE);
-        g.drawString(stopWatch.elapsedTime(), Width /3, Height /3);
+        g.drawString(stopWatch. elapsedTime(), Size , Height );
     }
     
 
