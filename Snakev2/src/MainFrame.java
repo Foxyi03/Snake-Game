@@ -46,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
         
         
     }
-    //creates the snake, randomly places an apple, starts the timer
+    //creates the snake, randomly places an apple and bread, starts the timer
     private void initGame(){
         snake.parts = 3;
 
@@ -68,9 +68,10 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             snake.checkBread();
             snake.checkCollision();
             snake.move();
+            snake.checkCollisioninitself();
             
            
-        }
+        } 
         repaint();
     }
 

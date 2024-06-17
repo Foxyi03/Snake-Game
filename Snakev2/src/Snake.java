@@ -30,7 +30,7 @@ public class Snake{
     public boolean goUp = false;
     public boolean goDown = false;
     private boolean inField = false;
-    //rwo timers, first one is to play the game, second one is running until window is closed
+    //timer, to play the game
     private Timer gameTimer;
     //body and head and apple parts are being called up + the location of the food
     public int parts = 3;
@@ -62,10 +62,10 @@ public class Snake{
             }
             Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
 
-            }  else {
+            }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
-        }      
+        } 
 
     }    
 
@@ -92,7 +92,7 @@ public class Snake{
     
     public void gameOver(Graphics g){ //game over screen, works
         String msg = "Game Over";
-        g.setColor(Color.black);
+        g.setColor(Color.WHITE);
         g.drawString(msg, Width / 2, Height / 2);
     }
     public String gameOver(){
@@ -144,7 +144,7 @@ public class Snake{
         }
     }
 
-    public void checkCollision() { //checks if the snake hits anything
+    public void checkCollision() { //checks if the snake hits borders
 
         for (int z = parts; z > 0; z--) {
 
@@ -168,13 +168,41 @@ public class Snake{
         if (x[0] < 0) {
             inField = true;
         }
-        
+        /*
         if (inField) { //if snake hits the wall then it should give a game over
-            gameOver();
             gameTimer.stop();
             
-        } 
+        } */
+        
     }
+    //lower code is faulty, gives ArrayIndexOutOfBoundsExaption
+    public void checkCollisioninitself(){ //checks if the snake hits itself
+        for (int z = parts; z > 0; z--) {
+
+            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
+                inField = false;
+            }
+        }
+        for(int i = parts; i > 0; i--){
+            if (y[0] == y[i]) {
+                inField = true;
+            }
+            if(x[0] == x[i]){
+                inField = true;
+            }
+        }
+             
+        
+        /*
+        if (inField) { //if snake hits the wall then it should give a game over
+            gameTimer.stop();
+            
+        } */
+        }
+       
+
+        
+    
 
 
 /*------------------------------------------------------------------------------------------------------------------------*/
