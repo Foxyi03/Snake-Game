@@ -42,6 +42,8 @@ public class Snake{
     private int appleY;
     private int breadX;
     private int breadY;
+    //other classes
+    private StopWatch stopWatch = new StopWatch();
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
@@ -53,6 +55,10 @@ public class Snake{
             score(g);
             headdraw(g);
             bodydraw(g);
+            if(stopWatch == null){
+                stopWatch.start();
+            }
+            
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
                     //head
@@ -69,7 +75,10 @@ public class Snake{
             }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
-            
+            if(stopWatch == null){
+                stopWatch.stop();
+            }
+            drawElapsedTime(g);
         } 
 
     }    
@@ -87,17 +96,6 @@ public class Snake{
         breadY = (b * Size);
     }
     
-    public void gameStart(Graphics g){ //game start screen, needs to be implemented
-        String msg = "Game Start";
-        g.setColor(Color.BLACK);
-        g.drawString(msg, Width/2, Height/2);
-    }
-    
-    public void gameOver(Graphics g){ //game over screen, works
-        String msg = "Game Over";
-        g.setColor(Color.WHITE);
-        g.drawString(msg, Width / 2, Height / 2);
-    }
     
     public void checkApple(){ //checks if the head collides with the apple, when yes then the snake gets longer and the apple changes location
         if((x[0]== appleX) && (y[0]== appleY)){
@@ -113,12 +111,6 @@ public class Snake{
         }
     }
     
-    public void score(Graphics g){//returns the score
-        String scoremsg = "Score:";
-        int scoreAmount = parts;
-        g.setColor(Color.WHITE);
-        g.drawString(scoremsg + " " + scoreAmount, 10,10);
-    }
     
     
     public void move() { //movement of the snake
@@ -176,11 +168,32 @@ public class Snake{
         } */
         
     }
-    
+/*------------------------------------------------------------------------------------------------------------------------*/
 
-        
+    public void score(Graphics g){//returns the score
+        String scoremsg = "Score:";
+        int scoreAmount = parts;
+        g.setColor(Color.WHITE);
+        g.drawString(scoremsg + " " + scoreAmount, 10,10);
+    }
     
-
+    public void gameStart(Graphics g){ //game start screen, needs to be implemented
+        String msg = "Game Start";
+        g.setColor(Color.BLACK);
+        g.drawString(msg, Width/2, Height/2);
+    }
+    
+    public void gameOver(Graphics g){ //game over screen, works
+        String msg = "Game Over";
+        g.setColor(Color.WHITE);
+        g.drawString(msg, Width / 2, Height / 2);
+    }
+    
+    public void drawElapsedTime(Graphics g){ //draws the elapsed time
+        g.setColor(Color.WHITE);
+        g.drawString(stopWatch.elapsedTime(), Width /3, Height /3);
+    }
+    
 
 /*------------------------------------------------------------------------------------------------------------------------*/
 
