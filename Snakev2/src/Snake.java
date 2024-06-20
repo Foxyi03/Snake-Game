@@ -34,8 +34,6 @@ public class Snake{
     public boolean goUp = false;
     public boolean goDown = false;
     private boolean inField = false;
-    //timer, to play the game
-    private Timer gameTimer;
     //body and head and apple parts are being called up + the location of the food
     public int parts = 3;
     private int appleX;
@@ -55,10 +53,11 @@ public class Snake{
             score(g);
             headdraw(g);
             bodydraw(g);
+            /*doesn't work. don't know why
             stopWatch.start();
             drawTime(g);
-            //drawElapsedTime(g);
-            
+            drawElapsedTime(g);
+            */
             
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
@@ -76,9 +75,10 @@ public class Snake{
             }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
+            /* doesn't work. don't know why
             stopWatch.stop();
             drawElapsedTime(g);
-            
+            */
         }
         
     }    
@@ -186,7 +186,7 @@ public class Snake{
     public void gameOver(Graphics g){ //game over screen, works
         String msg = "Game Over";
         g.setColor(Color.WHITE);
-        g.drawString(msg, Width / 2, Height / 2);
+        g.drawString(msg, Size, Height /2);
     }
     
     public void drawElapsedTime(Graphics g){ //draws the elapsed time

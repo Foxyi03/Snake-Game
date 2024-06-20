@@ -20,7 +20,7 @@ import javax.swing.Timer;
  */
 public class MainFrame extends javax.swing.JFrame implements ActionListener{
     private final Snake snake;
-    private final boolean inField = false;
+    private boolean inField = false;
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
     private final int gameSpeed = 100;
@@ -92,6 +92,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             }
         });
 
+        drawPanel.setForeground(new java.awt.Color(153, 153, 153));
         drawPanel.setPreferredSize(new java.awt.Dimension(300, 300));
 
         javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
