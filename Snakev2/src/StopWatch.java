@@ -18,15 +18,15 @@ public class StopWatch {
     }
     
     public void start(){
-        startTime = System.currentTimeMillis();
+        startTime = (System.currentTimeMillis());
     }
     public void stop(){
-        stopTime = (System.currentTimeMillis() - startTime) / 1000;
+        stopTime = (System.currentTimeMillis() - startTime);
         //System.out.println("StopWatch: " + getElapsedTimeSecs() + " second.");
     }
     public double getElapsedTimeSecs(){
         double elapsed = (stopTime - startTime);
-        return elapsed / 1000.0;
+        return elapsed / 1000;
     }
     public String elapsedTime(){
         return ("Time: " + getElapsedTimeSecs() + " seconds.");
@@ -34,8 +34,8 @@ public class StopWatch {
     /*------------------------------------------------------------------------------------------------------------------------*/
    
     public double getTime(){
-        double time = (startTime);
-        return time / 1000;
+        double time = startTime;
+        return time;
     }
     public String timeElapsed(){
         return ("Time: " + getTime() + " seconds.");

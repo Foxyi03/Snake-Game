@@ -43,7 +43,7 @@ public class Snake{
     private int breadX;
     private int breadY;
     //other classes
-    private StopWatch stopWatch = new StopWatch();
+    private final StopWatch stopWatch = new StopWatch();
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
@@ -57,6 +57,7 @@ public class Snake{
             bodydraw(g);
             stopWatch.start();
             drawTime(g);
+            //drawElapsedTime(g);
             
             
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
