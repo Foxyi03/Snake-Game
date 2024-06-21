@@ -20,8 +20,8 @@ import java.time.LocalTime;
 public class Snake { 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
-    private int maxWidth = 400;
-    private int maxHeight = 400;
+    private final int maxWidth = 400;  //maximum Width of the DrawPanel and the Game Field
+    private final int maxHeight = 400; //maximum Height of the DrawPanel and the Game Field
     final int Size = 10; //sizes of the body and foods
     private final int maxSize = 900; //max numbers of things on the DrawPanel
     private final int randomPosition = 30; //calculation of the position of an apple
