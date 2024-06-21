@@ -24,7 +24,7 @@ public class Snake {
     private final int maxHeight = 400; //maximum Height of the DrawPanel and the Game Field
     final int Size = 10; //sizes of the body and foods
     private final int maxSize = 900; //max numbers of things on the DrawPanel
-    private final int randomPosition = 30; //calculation of the position of an apple
+    private final int randomPosition = 30; //calculation of the position of the food, uses the size to calculate the position of the food to a max of 300, can be less
     
     
     public final int x[] = new int[maxSize]; //stores the x coordinates of all the bodyparts of the snake
@@ -35,9 +35,9 @@ public class Snake {
     public boolean goRight = false;
     public boolean goUp = false;
     public boolean goDown = false;
-    private boolean inField = false;
-    //body and head and apple parts are being called up + the location of the food
-    public int parts = 3;
+    private boolean inField = false; //must be false, determines if the code works or not
+    //the location of the food, x and y coords
+    public int parts = 3; //can be changed. is the default starting size of the snake
     private int appleX;
     private int appleY;
     private int breadX;
