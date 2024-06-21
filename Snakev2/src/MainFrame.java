@@ -20,11 +20,11 @@ import javax.swing.Timer;
  */
 public class MainFrame extends javax.swing.JFrame implements ActionListener{
     private final Snake snake;
-    private boolean inField = false;
+    private final boolean inField = false;
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
     private final int gameSpeed = 100;
-    private Timer gameTimer;
+    Timer gameTimer;
 
     /**
      * Creates new form MainFrame
@@ -68,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener{
             snake.checkBread();
             snake.checkCollision();
             snake.move();
-            
+                        
            
         } 
         repaint();

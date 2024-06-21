@@ -21,7 +21,7 @@ public class StopWatch {
         startTime = (System.currentTimeMillis());
     }
     public void stop(){
-        stopTime = (System.currentTimeMillis() - startTime);
+        stopTime = (System.currentTimeMillis());
         //System.out.println("StopWatch: " + getElapsedTimeSecs() + " second.");
     }
     public double getElapsedTimeSecs(){
@@ -33,12 +33,5 @@ public class StopWatch {
     }
     /*------------------------------------------------------------------------------------------------------------------------*/
    
-    public double getTime(){
-        double time = startTime;
-        return time;
-    }
-    public String timeElapsed(){
-        return ("Time: " + getTime() + " seconds.");
-    }
     
 }

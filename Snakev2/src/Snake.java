@@ -17,9 +17,11 @@ import java.time.LocalTime;
  * @author Foxyi03
  */
 
-public class Snake{ 
+public class Snake { 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
+    private int maxWidth = 400;
+    private int maxHeight = 400;
     final int Size = 10; //sizes of the body and foods
     private final int maxSize = 900; //max numbers of things on the DrawPanel
     private final int randomPosition = 30; //calculation of the position of an apple
@@ -42,6 +44,7 @@ public class Snake{
     private int breadY;
     //other classes
     private final StopWatch stopWatch = new StopWatch();
+    private Timer gameTimer;
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
@@ -53,11 +56,11 @@ public class Snake{
             score(g);
             headdraw(g);
             bodydraw(g);
-            /*doesn't work. don't know why
-            stopWatch.start();
-            drawTime(g);
+            
+            
+            //works
             drawElapsedTime(g);
-            */
+            stopWatch.stop(); //starts the time
             
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
@@ -75,10 +78,9 @@ public class Snake{
             }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
-            /* doesn't work. don't know why
-            stopWatch.stop();
-            drawElapsedTime(g);
-            */
+            
+            //this works
+            drawElapsedTime(g); //draws the elapsed time
         }
         
     }    
@@ -104,7 +106,7 @@ public class Snake{
         }
     }
     
-    public void checkBread(){//checks for bread, i think it adds 2 parts
+    public void checkBread(){//checks for bread, adds 2 parts
         if((x[0]==breadX) && (y[0]==breadY)){
             parts +=2; //adds 2 bread
             breadLoc();
@@ -145,26 +147,38 @@ public class Snake{
                 inField = true;
             }
         }
-        //checks if the snake hits borders
+        //checks if the snake hits borders, if the snake goes over the borders + - 100 then the timer ends
         if (y[0] >= Height) {
             inField = true;
+        }
+        if(y[0] >= maxHeight) {
+            gameTimer.stop();
         }
 
         if (y[0] < 0) {
             inField = true;
         }
+        if(y[0] < -100) {
+            gameTimer.stop();
+        }
 
         if (x[0] >= Width) {
             inField = true;
+        }
+        if (x[0] >= maxWidth) {
+            gameTimer.stop();
         }
 
         if (x[0] < 0) {
             inField = true;
         }
+        if(x[0] < -100) {
+            gameTimer.stop();
+        }
         
-        if (inField) { //if snake hits the wall then it should give a game over
+        if (inField) { //if snake hits the wall then it should give a game over. is unneeded
             //gameTimer.stop();
-            stopWatch.stop();
+            //stopWatch.stop();
         }
         
     }
@@ -186,18 +200,14 @@ public class Snake{
     public void gameOver(Graphics g){ //game over screen, works
         String msg = "Game Over";
         g.setColor(Color.WHITE);
-        g.drawString(msg, Size, Height /2);
+        g.drawString(msg, Size + 100, Height /2);
     }
     
     public void drawElapsedTime(Graphics g){ //draws the elapsed time
         g.setColor(Color.WHITE);
-        g.drawString(stopWatch. elapsedTime(), Size , Height );
+        g.drawString(stopWatch.elapsedTime(), Size , Height );
     }
     
-    public void drawTime(Graphics g){
-        g.setColor(Color.WHITE);
-        g.drawString(stopWatch. timeElapsed(), Size , Height );
-    }
     
 
 /*------------------------------------------------------------------------------------------------------------------------*/
