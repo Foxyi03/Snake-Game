@@ -7,16 +7,20 @@
 
 import javax.swing.Timer;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 
 /**
  *
  * @author Foxyi03
  */
+
 public class Snake{ 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
-    private final int Size = 10; //sizes of the body and foods
+    final int Size = 10; //sizes of the body and foods
     private final int maxSize = 900; //max numbers of things on the DrawPanel
     private final int randomPosition = 30; //calculation of the position of an apple
     
@@ -30,18 +34,18 @@ public class Snake{
     public boolean goUp = false;
     public boolean goDown = false;
     private boolean inField = false;
-    //rwo timers, first one is to play the game, second one is running until window is closed
-    private Timer gameTimer;
     //body and head and apple parts are being called up + the location of the food
     public int parts = 3;
     private int appleX;
     private int appleY;
     private int breadX;
     private int breadY;
+    //other classes
+    private final StopWatch stopWatch = new StopWatch();
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
-        //System.out.println(x[1] + " " + y[1]);
+        System.out.println(x[0] + " " + y[0]); //coordinates will be shown
         if(!inField){ 
             //draws everything needed to start the game
             appledraw(g);
@@ -49,6 +53,12 @@ public class Snake{
             score(g);
             headdraw(g);
             bodydraw(g);
+            /*doesn't work. don't know why
+            stopWatch.start();
+            drawTime(g);
+            drawElapsedTime(g);
+            */
+            
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
                     //head
@@ -62,11 +72,15 @@ public class Snake{
             }
             Toolkit.getDefaultToolkit().sync(); //syncs the Graphics up with what is being displayed on screen
 
-            }  else {
+            }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
-        }      
-
+            /* doesn't work. don't know why
+            stopWatch.stop();
+            drawElapsedTime(g);
+            */
+        }
+        
     }    
 
 
@@ -83,21 +97,6 @@ public class Snake{
     }
     
     
-    
-    public void gameStart(Graphics g){ //game start screen, needs to be implemented
-        String msg = "Game Start";
-        g.setColor(Color.BLACK);
-        g.drawString(msg, Width/2, Height/2);
-    }
-    
-    public void gameOver(Graphics g){ //game over screen, works
-        String msg = "Game Over";
-        g.setColor(Color.black);
-        g.drawString(msg, Width / 2, Height / 2);
-    }
-    public String gameOver(){
-        return "Game Over";
-    }
     public void checkApple(){ //checks if the head collides with the apple, when yes then the snake gets longer and the apple changes location
         if((x[0]== appleX) && (y[0]== appleY)){
             parts ++;
@@ -112,17 +111,11 @@ public class Snake{
         }
     }
     
-    public void score(Graphics g){//returns the score
-        String scoremsg = "Score:";
-        int scoreAmount = parts;
-        g.setColor(Color.WHITE);
-        g.drawString(scoremsg + " " + scoreAmount, 10,10);
-    }
     
     
     public void move() { //movement of the snake
             
-        for (int z = parts; z > 0; z--) { // need to check this again
+        for (int z = parts; z > 0; z--) { 
             x[z] = x[(z - 1)];
             y[z] = y[(z - 1)];
         }
@@ -144,15 +137,15 @@ public class Snake{
         }
     }
 
-    public void checkCollision() { //checks if the snake hits anything
+    public void checkCollision() { 
 
-        for (int z = parts; z > 0; z--) {
+        for (int z = parts; z > 0; z--) {//checks if the snake hits itself
 
             if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
-                inField = false;
+                inField = true;
             }
         }
-
+        //checks if the snake hits borders
         if (y[0] >= Height) {
             inField = true;
         }
@@ -170,16 +163,47 @@ public class Snake{
         }
         
         if (inField) { //if snake hits the wall then it should give a game over
-            gameOver();
-            gameTimer.stop();
-            
-        } 
+            //gameTimer.stop();
+            stopWatch.stop();
+        }
+        
     }
+/*------------------------------------------------------------------------------------------------------------------------*/
 
+    public void score(Graphics g){//returns the score
+        String scoremsg = "Score:";
+        int scoreAmount = parts;
+        g.setColor(Color.WHITE);
+        g.drawString(scoremsg + " " + scoreAmount, 10,10);
+    }
+    
+    public void gameStart(Graphics g){ //game start screen, needs to be implemented
+        String msg = "Game Start";
+        g.setColor(Color.BLACK);
+        g.drawString(msg, Width/2, Height/2);
+    }
+    
+    public void gameOver(Graphics g){ //game over screen, works
+        String msg = "Game Over";
+        g.setColor(Color.WHITE);
+        g.drawString(msg, Size, Height /2);
+    }
+    
+    public void drawElapsedTime(Graphics g){ //draws the elapsed time
+        g.setColor(Color.WHITE);
+        g.drawString(stopWatch. elapsedTime(), Size , Height );
+    }
+    
+    public void drawTime(Graphics g){
+        g.setColor(Color.WHITE);
+        g.drawString(stopWatch. timeElapsed(), Size , Height );
+    }
+    
 
 /*------------------------------------------------------------------------------------------------------------------------*/
 
     //draw section
+    
     private void bodydraw(Graphics g){
         g.setColor(Color.CYAN);
         g.fillOval(x[0], y[0], Size, Size);
