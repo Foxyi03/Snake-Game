@@ -17,12 +17,14 @@ import java.time.LocalTime;
  * @author Foxyi03
  */
 
-public class Snake{ 
+public class Snake { 
     private final int Width = 300; //width of the drawPanel
     private final int Height = 300; //height of the drawPanel
+    private final int maxWidth = 400;  //maximum Width of the DrawPanel and the Game Field
+    private final int maxHeight = 400; //maximum Height of the DrawPanel and the Game Field
     final int Size = 10; //sizes of the body and foods
     private final int maxSize = 900; //max numbers of things on the DrawPanel
-    private final int randomPosition = 30; //calculation of the position of an apple
+    private final int randomPosition = 30; //calculation of the position of the food, uses the size to calculate the position of the food to a max of 300, can be less
     
     
     public final int x[] = new int[maxSize]; //stores the x coordinates of all the bodyparts of the snake
@@ -33,17 +35,16 @@ public class Snake{
     public boolean goRight = false;
     public boolean goUp = false;
     public boolean goDown = false;
-    private boolean inField = false;
-    //timer, to play the game
-    private Timer gameTimer;
-    //body and head and apple parts are being called up + the location of the food
-    public int parts = 3;
+    private boolean inField = false; //must be false, determines if the code works or not
+    //the location of the food, x and y coords
+    public int parts = 3; //can be changed. is the default starting size of the snake
     private int appleX;
     private int appleY;
     private int breadX;
     private int breadY;
     //other classes
-    private StopWatch stopWatch = new StopWatch();
+    private final StopWatch stopWatch = new StopWatch();
+    private Timer gameTimer;
 
 /*------------------------------------------------------------------------------------------------------------------------*/
     public void draw(Graphics g){ //draws the game
@@ -55,9 +56,11 @@ public class Snake{
             score(g);
             headdraw(g);
             bodydraw(g);
-            if(stopWatch == null){
-                stopWatch.start();
-            }
+            
+            
+            //works
+            drawElapsedTime(g);
+            stopWatch.stop(); //starts the time
             
             for(int i = 0; i < parts; i++){ //if x[0] then a head will be drawn, if x[1] a body will be drawn
                 if(i == 0){
@@ -75,12 +78,11 @@ public class Snake{
             }  else if(inField){
             gameOver(g); //it is game over once the parts are null, game Over does not work
             score(g);//gives the current score
-            if(stopWatch == null){
-                stopWatch.stop();
-            }
-            drawElapsedTime(g);
-        } 
-
+            
+            //this works
+            drawElapsedTime(g); //draws the elapsed time
+        }
+        
     }    
 
 
@@ -104,7 +106,7 @@ public class Snake{
         }
     }
     
-    public void checkBread(){//checks for bread, i think it adds 2 parts
+    public void checkBread(){//checks for bread, adds 2 parts
         if((x[0]==breadX) && (y[0]==breadY)){
             parts +=2; //adds 2 bread
             breadLoc();
@@ -145,27 +147,39 @@ public class Snake{
                 inField = true;
             }
         }
-        //checks if the snake hits borders
+        //checks if the snake hits borders, if the snake goes over the borders + - 100 then the timer ends
         if (y[0] >= Height) {
             inField = true;
+        }
+        if(y[0] >= maxHeight) {
+            gameTimer.stop();
         }
 
         if (y[0] < 0) {
             inField = true;
         }
+        if(y[0] < -100) {
+            gameTimer.stop();
+        }
 
         if (x[0] >= Width) {
             inField = true;
+        }
+        if (x[0] >= maxWidth) {
+            gameTimer.stop();
         }
 
         if (x[0] < 0) {
             inField = true;
         }
-        /*
-        if (inField) { //if snake hits the wall then it should give a game over
+        if(x[0] < -100) {
             gameTimer.stop();
-            
-        } */
+        }
+        
+        if (inField) { //if snake hits the wall then it should give a game over. is unneeded
+            //gameTimer.stop();
+            //stopWatch.stop();
+        }
         
     }
 /*------------------------------------------------------------------------------------------------------------------------*/
@@ -186,13 +200,14 @@ public class Snake{
     public void gameOver(Graphics g){ //game over screen, works
         String msg = "Game Over";
         g.setColor(Color.WHITE);
-        g.drawString(msg, Width / 2, Height / 2);
+        g.drawString(msg, Size + 100, Height /2);
     }
     
     public void drawElapsedTime(Graphics g){ //draws the elapsed time
         g.setColor(Color.WHITE);
-        g.drawString(stopWatch.elapsedTime(), Width /3, Height /3);
+        g.drawString(stopWatch.elapsedTime(), Size , Height );
     }
+    
     
 
 /*------------------------------------------------------------------------------------------------------------------------*/
